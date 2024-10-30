@@ -12,39 +12,39 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
         <DrawerItem
           label="Lista Franquias"
           onPress={() => props.navigation.navigate('ListaFranquias')}
-          icon={({ color, size }) => (
-            <Icon name="list" color={color} size={size} />
+          icon={({ size }) => (
+            <Icon name="list" size={size} style={styles.drawerIcon} />
           )}
           labelStyle={styles.drawerItemLabel}
         />
         <DrawerItem
           label="Lista Jogos"
           onPress={() => props.navigation.navigate('ListaJogos')}
-          icon={({ color, size }) => (
-            <Icon name="games" color={color} size={size} />
+          icon={({ size }) => (
+            <Icon name="games" size={size} style={styles.drawerIcon} />
           )}
           labelStyle={styles.drawerItemLabel}
         />
         <DrawerItem
           label="Jogos Favoritos"
           onPress={() => props.navigation.navigate('ListaJogosFav')}
-          icon={({ color, size }) => (
-            <Icon name="favorite" color={color} size={size} />
+          icon={({ size }) => (
+            <Icon name="favorite" size={size} style={styles.drawerIcon} />
           )}
           labelStyle={styles.drawerItemLabel}
         />
         <DrawerItem
           label="Franquias Favoritas"
           onPress={() => props.navigation.navigate('ListaFranquiaFav')}
-          icon={({ color, size }) => (
-            <Icon name="star" color={color} size={size} />
+          icon={({ size }) => (
+            <Icon name="star" size={size} style={styles.drawerIcon} />
           )}
           labelStyle={styles.drawerItemLabel}
         />
       </View>
       <View style={styles.logOutContainer}>
         <TouchableOpacity onPress={() => props.navigation.navigate('WelcomeScreen')} style={styles.logOutButton}>
-          <Icon name="exit-to-app" size={24} color="#FF6347" />
+          <Icon name="exit-to-app" size={24} style={[styles.drawerIcon, { color: '#FF6347', marginRight: 10 }]} />
           <Text style={styles.logOutText}>Log Out</Text>
         </TouchableOpacity>
       </View>

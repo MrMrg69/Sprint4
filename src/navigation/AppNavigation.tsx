@@ -5,7 +5,7 @@ import ListaFranquias from '../screens/ListaFranquias';
 import ListaJogos from '../screens/ListaJogos';
 import ListaJogosFav from '../screens/ListaJogosFav';
 import LogIn from '../screens/LogIn';
-import SignIn from '../screens/SingIn';
+import SignIn from '../screens/SignIn';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import CustomDrawerContent from '../navigation/CustomDrawer';
 
@@ -23,14 +23,41 @@ export type RootStackParamList = {
 
 const AppNavigation = () => {
     return (
-        <Drawer.Navigator initialRouteName="WelcomeScreen" drawerContent={(props) => <CustomDrawerContent {...props} />}>
-            <Drawer.Screen name="WelcomeScreen" component={WelcomeScreen} />
-            <Drawer.Screen name="SignIn" component={SignIn} />
-            <Drawer.Screen name="LogIn" component={LogIn} />
-            <Drawer.Screen name="ListaFranquias" component={ListaFranquias} />
-            <Drawer.Screen name="ListaJogos" component={ListaJogos} />
-            <Drawer.Screen name="ListaFranquiaFav" component={ListaFranquiaFav} />
-            <Drawer.Screen name="ListaJogosFav" component={ListaJogosFav} />
+        <Drawer.Navigator
+            initialRouteName="WelcomeScreen"
+            drawerContent={(props) => <CustomDrawerContent {...props} />}
+        >
+            <Drawer.Screen
+                name="WelcomeScreen"
+                component={WelcomeScreen}
+                options={{ headerShown: false }}
+            />
+            <Drawer.Screen
+                name="SignIn"
+                component={SignIn}
+                options={{ headerShown: false }}
+            />
+            <Drawer.Screen
+                name="LogIn"
+                component={LogIn}
+                options={{ headerShown: false }}
+            />
+            <Drawer.Screen
+                name="ListaFranquias"
+                component={ListaFranquias}
+            />
+            <Drawer.Screen
+                name="ListaJogos"
+                component={ListaJogos}
+            />
+            <Drawer.Screen
+                name="ListaFranquiaFav"
+                component={ListaFranquiaFav}
+            />
+            <Drawer.Screen
+                name="ListaJogosFav"
+                component={ListaJogosFav}
+            />
         </Drawer.Navigator>
     );
 };

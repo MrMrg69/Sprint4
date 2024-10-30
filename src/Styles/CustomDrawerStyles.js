@@ -8,6 +8,9 @@ const styles = StyleSheet.create({
   drawerItemLabel: {
     color: '#FFF',
   },
+  drawerIcon: {
+    color: '#FFF', // Altera a cor dos ícones para branco
+  },
   logOutContainer: {
     flexDirection: 'row',
     alignItems: 'center',
