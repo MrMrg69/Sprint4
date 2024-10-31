@@ -6,32 +6,6 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#222',
   },
-  modalContainer: {
-    backgroundColor: '#3333FF',
-    padding: 20,
-    borderRadius: 8,
-    marginVertical: 20,
-    position: 'relative',
-    borderWidth: 1,
-    borderColor: '#FFA500',
-  },
-  modalText: {
-    color: '#FFF',
-    fontSize: 16,
-    marginBottom: 10,
-  },
-  closeButton: {
-    position: 'absolute',
-    top: -10,
-    right: -10,
-    color: '#FFF',
-    fontWeight: 'bold',
-    fontSize: 18,
-    padding: 5,
-    backgroundColor: '#FF6347',
-    borderRadius: 15,
-    elevation: 5,
-  },
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -109,6 +83,26 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontWeight: 'bold',
     fontSize: 16,
+  },
+
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  description: {
+    color: '#DDD',
+    fontSize: 14,
+    lineHeight: 20,
+    flex: 1,
+    flexWrap: 'wrap',
+    marginLeft: 10,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#555',
+    marginVertical: 10,
+    marginHorizontal: 10,
   },
 });
 

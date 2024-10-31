@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-type Franquia = {
+export type Franquia = {
   id: string;
   nome: string;
   favorito: boolean;
@@ -9,15 +9,27 @@ type Franquia = {
 type FranquiasContextType = {
   franquias: Franquia[];
   setFranquias: React.Dispatch<React.SetStateAction<Franquia[]>>;
+  toggleFavorito: (id: string) => void;
 };
 
 const FranquiasContext = createContext<FranquiasContextType | undefined>(undefined);
 
 export const FranquiasProvider = ({ children }: { children: ReactNode }) => {
-  const [franquias, setFranquias] = useState<Franquia[]>([]);
+  const [franquias, setFranquias] = useState<Franquia[]>([
+  ]);
+
+  const toggleFavorito = (id: string) => {
+    setFranquias((prevFranquias) =>
+      prevFranquias.map((franquia) =>
+        franquia.id === id
+          ? { ...franquia, favorito: true }
+          : { ...franquia, favorito: false }
+      )
+    );
+  };
 
   return (
-    <FranquiasContext.Provider value={{ franquias, setFranquias }}>
+    <FranquiasContext.Provider value={{ franquias, setFranquias, toggleFavorito }}>
       {children}
     </FranquiasContext.Provider>
   );

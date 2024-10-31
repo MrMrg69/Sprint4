@@ -1,0 +1,127 @@
+import { StyleSheet } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#222',
+    padding: 16,
+  },
+  avisoContainer: {
+    backgroundColor: '#3333FF',
+    padding: 20,
+    borderRadius: 8,
+    marginVertical: 20,
+    borderWidth: 1,
+    borderColor: '#FFA500',
+    position: 'relative',
+  },
+  avisoText: {
+    color: '#FFF',
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: -10,
+    right: -10,
+    padding: 5,
+    backgroundColor: '#FF6347',
+    borderRadius: 15,
+    elevation: 5,
+  },
+  closeButtonText: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  itemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#555',
+  },
+  item: {
+    fontSize: 18,
+    color: '#FFF',
+    flex: 1,
+    flexWrap: 'wrap',
+    marginRight: 10,
+  },
+  iconContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  modalBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  },
+  addModalContainer: {
+    width: '85%',
+    backgroundColor: '#1a1a1a',
+    padding: 25,
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: '#00E5FF',
+    elevation: 10,
+  },
+  modalContainer: {
+    padding: 20,
+    backgroundColor: '#333',
+    borderRadius: 10,
+    borderColor: '#00E5FF',
+    borderWidth: 2,
+    marginVertical: 10,
+  },
+  modalText: {
+    color: '#FFF',
+    fontSize: 16,
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#00E5FF',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  input: {
+    borderWidth: 2,
+    borderColor: '#00E5FF',
+    padding: 12,
+    marginBottom: 20,
+    borderRadius: 10,
+    color: '#FFF',
+    backgroundColor: '#333',
+  },
+  addButton: {
+    backgroundColor: '#00E5FF',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  addButtonText: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  cancelButton: {
+    backgroundColor: '#FF6347',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  cancelButtonText: {
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+});
+
+export default styles;

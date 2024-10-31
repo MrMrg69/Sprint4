@@ -12,7 +12,7 @@ type ListaFranquiasNavigationProp = StackNavigationProp<RootStackParamList, 'Lis
 
 const ListaFranquias = ({ navigation }: { navigation: ListaFranquiasNavigationProp }) => {
   const { franquias, setFranquias } = useFranquias();
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(true); // Exibe o aviso inicial
   const [showAddModal, setShowAddModal] = useState(false);
   const [showRenameModal, setShowRenameModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -55,7 +55,7 @@ const ListaFranquias = ({ navigation }: { navigation: ListaFranquiasNavigationPr
   const toggleFavorito = (id: string) => {
     setFranquias((prevFranquias) =>
       prevFranquias.map((franquia) =>
-        franquia.id === id ? { ...franquia, favorito: !franquia.favorito } : franquia
+        franquia.id === id ? { ...franquia, favorito: !franquia.favorito } : { ...franquia, favorito: false }
       )
     );
   };

@@ -1,5 +1,9 @@
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerScreenProps } from '@react-navigation/drawer';
+import { DrawerActions } from '@react-navigation/native';
 import React, { useState } from 'react';
+import { TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import ListaFranquiaFav from '../screens/ListaFranquiaFav';
 import ListaFranquias from '../screens/ListaFranquias';
 import ListaJogos from '../screens/ListaJogos';
@@ -8,7 +12,7 @@ import LogIn from '../screens/LogIn';
 import SignIn from '../screens/SignIn';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import CustomDrawerContent from '../navigation/CustomDrawer';
-import { Franquia } from '../screens/ListaFranquias';
+import { Franquia } from './types';
 
 const Drawer = createDrawerNavigator();
 
@@ -55,9 +59,27 @@ const AppNavigation = () => {
       />
       <Drawer.Screen
         name="ListaFranquias"
-        component={(props) => (
+        component={(props: any) => (
           <ListaFranquias {...props} franquias={franquias} setFranquias={setFranquias} />
         )}
+        options={({ navigation }) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+              <Icon name="menu" size={32} color="#555" style={{ marginLeft: 16 }} />
+            </TouchableOpacity>
+          ),
+          headerTitleAlign: 'center',
+          headerTitle: 'Lista Franquias',
+          headerStyle: {
+            backgroundColor: '#222',
+            elevation: 0,
+            shadowOpacity: 0,
+          },
+          headerTitleStyle: {
+            color: '#00E5FF',
+            fontFamily: 'PressStart2P-Regular',
+          },
+        })}
       />
       <Drawer.Screen
         name="ListaJogos"
@@ -65,14 +87,31 @@ const AppNavigation = () => {
       />
       <Drawer.Screen
         name="ListaFranquiaFav"
-        component={(props) => (
+        component={(props: any) => (
           <ListaFranquiaFav
             {...props}
             franquias={franquias.filter((franquia) => franquia.favorito)}
             toggleFavorito={toggleFavorito}
           />
         )}
-        options={{ title: 'Franquia Favorita' }}
+        options={({ navigation }) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+              <Icon name="menu" size={32} color="#555" style={{ marginLeft: 16 }} />
+            </TouchableOpacity>
+          ),
+          headerTitleAlign: 'center',
+          headerTitle: 'Franquia Favorita',
+          headerStyle: {
+            backgroundColor: '#222',
+            elevation: 0,
+            shadowOpacity: 0,
+          },
+          headerTitleStyle: {
+            color: '#00E5FF',
+            fontFamily: 'PressStart2P-Regular',
+          },
+        })}
       />
       <Drawer.Screen
         name="ListaJogosFav"
