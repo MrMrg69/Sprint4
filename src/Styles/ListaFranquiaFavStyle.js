@@ -7,24 +7,44 @@ const styles = StyleSheet.create({
     backgroundColor: '#222',
   },
   itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    marginBottom: 20,
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#555',
   },
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   item: {
     fontSize: 18,
     color: '#FFF',
+    fontWeight: 'bold',
     flex: 1,
     flexWrap: 'wrap',
     marginRight: 10,
-    maxWidth: '70%',
   },
   iconContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  descriptionContainer: {
+    backgroundColor: '#333',
+    padding: 10,
+    borderRadius: 8,
+    marginTop: 10,
+  },
+  descriptionText: {
+    color: '#CCCCCC',
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#555',
+    marginVertical: 10,
+    marginHorizontal: 10,
   },
   modalBackground: {
     flex: 1,
@@ -83,26 +103,6 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontWeight: 'bold',
     fontSize: 16,
-  },
-
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  description: {
-    color: '#DDD',
-    fontSize: 14,
-    lineHeight: 20,
-    flex: 1,
-    flexWrap: 'wrap',
-    marginLeft: 10,
-  },
-  divider: {
-    height: 1,
-    backgroundColor: '#555',
-    marginVertical: 10,
-    marginHorizontal: 10,
   },
 });
 

@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#222',
     padding: 16,
   },
-  avisoContainer: {
+  warningContainer: {
     backgroundColor: '#3333FF',
     padding: 20,
     borderRadius: 8,
@@ -15,12 +15,12 @@ const styles = StyleSheet.create({
     borderColor: '#FFA500',
     position: 'relative',
   },
-  avisoText: {
+  warningText: {
     color: '#FFF',
     fontSize: 16,
-    marginBottom: 10,
+    textAlign: 'center',
   },
-  closeButton: {
+  closeWarningButton: {
     position: 'absolute',
     top: -10,
     right: -10,

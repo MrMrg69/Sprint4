@@ -11,11 +11,11 @@ const ListaFranquiaFav = () => {
   const getFranquiaDescription = (nome: string) => {
     switch (nome) {
       case "Assassin's Creed":
-        return "Assassin's Creed é uma série de jogos de ação e aventura com elementos de stealth, criada pela Ubisoft. A série acompanha a luta entre Assassinos e Templários ao longo da história.";
+        return "Assassin's Creed é uma franquia de jogos de ação e aventura criada pela Ubisoft. O conceito central de Assassin's Creed gira em torno de uma batalha entre duas facções milenares: os Assassinos e os Templários. Os Assassinos, inspirados em uma antiga ordem real, defendem o livre-arbítrio e lutam contra a opressão. Os Templários, por outro lado, acreditam que a ordem e o controle são necessários para alcançar a paz, o que frequentemente os leva a agir de maneira autoritária. Ambos os lados buscam artefatos conhecidos como Pedaços do Éden, relíquias poderosas deixadas por uma civilização ancestral chamada Isu, que têm o poder de controlar a mente humana.";
       case "BioShock":
-        return "BioShock é uma série de jogos de tiro em primeira pessoa com temas de filosofia e moralidade, criada pela 2K Games. A série explora sociedades utópicas distópicas submersas e futurísticas.";
+        return "A franquia BioShock, desenvolvida pela Irrational Games e lançada pela primeira vez em 2007, é uma das séries mais influentes dos jogos modernos, conhecida por sua mistura única de narrativa profunda, exploração de temas filosóficos e jogabilidade inovadora. A série se passa em locais fictícios e distópicos, como a cidade submersa de Rapture e a cidade flutuante de Columbia, e explora ideias de utopias corrompidas, livre-arbítrio, identidade e moralidade.";
       case "Amnesia":
-        return "Amnesia é uma série de jogos de horror de sobrevivência, criada pela Frictional Games. Conhecida por sua atmosfera aterrorizante e mecânicas de perda de memória.";
+        return "A franquia Amnesia, desenvolvida pela Frictional Games, tem a premissa central de Amnesia está na vulnerabilidade do jogador. Diferente de outros jogos de terror onde é possível lutar contra os inimigos, Amnesia força o jogador a se esconder, fugir e usar o ambiente para se proteger. Isso cria uma sensação constante de impotência e tensão, onde o medo vem não apenas das criaturas e do ambiente sombrio, mas também das próprias limitações do jogador.";
       default:
         return null;
     }
@@ -41,7 +41,7 @@ const ListaFranquiaFav = () => {
                 </TouchableOpacity>
               </View>
               {getFranquiaDescription(item.nome) && (
-                <Text style={styles.description}>{getFranquiaDescription(item.nome)}</Text>
+                <Text style={styles.descriptionText}>{getFranquiaDescription(item.nome)}</Text>
               )}
               <View style={styles.divider} />
             </View>

@@ -5,7 +5,7 @@ import { DrawerActions } from '@react-navigation/native';
 import { useJogos } from '../navigation/JogosContext';
 import styles from '../Styles/ListaJogosStyle';
 import { DrawerScreenProps } from '@react-navigation/drawer';
-import { RootStackParamList } from '../navigation/AppNavigation';
+import { RootStackParamList } from '../navigation/types';
 
 type ListaJogosProps = DrawerScreenProps<RootStackParamList, 'ListaJogos'>;
 
@@ -17,6 +17,7 @@ const ListaJogos = ({ navigation }: ListaJogosProps) => {
   const [jogoNome, setJogoNome] = useState('');
   const [currentJogoId, setCurrentJogoId] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState('');
+  const [showWarning, setShowWarning] = useState(true); // Aviso de franquias disponíveis
 
   const addJogo = () => {
     if (jogoNome.trim()) {
@@ -47,13 +48,16 @@ const ListaJogos = ({ navigation }: ListaJogosProps) => {
   const renameJogo = () => {
     if (jogoNome.trim()) {
       const isDuplicated = jogos.some(
-        (jogo) => jogo.nome.toLowerCase() === jogoNome.toLowerCase() && jogo.id !== currentJogoId
+        (jogo) =>
+          jogo.nome.toLowerCase() === jogoNome.toLowerCase() && jogo.id !== currentJogoId
       );
       if (isDuplicated) {
         setErrorMessage('Já existe um jogo com esse nome.');
       } else {
         setJogos((prevJogos) =>
-          prevJogos.map((jogo) => (jogo.id === currentJogoId ? { ...jogo, nome: jogoNome } : jogo))
+          prevJogos.map((jogo) =>
+            jogo.id === currentJogoId ? { ...jogo, nome: jogoNome } : jogo
+          )
         );
         setJogoNome('');
         setShowRenameModal(false);
@@ -64,12 +68,34 @@ const ListaJogos = ({ navigation }: ListaJogosProps) => {
     }
   };
 
+  const openDeleteModal = (id: string) => {
+    setCurrentJogoId(id);
+    setShowDeleteModal(true);
+  };
+
   const deleteJogo = () => {
     if (currentJogoId) {
       setJogos((prevJogos) => prevJogos.filter((jogo) => jogo.id !== currentJogoId));
       setShowDeleteModal(false);
       setCurrentJogoId(null);
     }
+  };
+
+  const closeAddModal = () => {
+    setJogoNome('');
+    setShowAddModal(false);
+    setErrorMessage('');
+  };
+
+  const closeRenameModal = () => {
+    setJogoNome('');
+    setShowRenameModal(false);
+    setErrorMessage('');
+  };
+
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+    setCurrentJogoId(null);
   };
 
   useLayoutEffect(() => {
@@ -100,20 +126,20 @@ const ListaJogos = ({ navigation }: ListaJogosProps) => {
 
   return (
     <View style={styles.container}>
-      {/* Aviso sobre as franquias disponíveis */}
-      <View style={styles.modalContainer}>
-        <Text style={styles.modalText}>
-          Aviso: O aplicativo atualmente possui apenas informações dos jogos das franquias "Assassin's Creed", "BioShock" e "Amnesia".
-        </Text>
-        <TouchableOpacity
-          onPress={() => setShowAddModal(false)}
-          style={styles.closeButton}
-        >
-          <Icon name="close" size={20} color="#FF6347" style={{ padding: 5, backgroundColor: 'rgba(0, 0, 0, 0.5)', borderRadius: 12 }} />
-        </TouchableOpacity>
-      </View>
+      {showWarning && (
+        <View style={styles.warningContainer}>
+          <Text style={styles.warningText}>
+            Aviso: O aplicativo atualmente possui apenas informações dos jogos das franquias "Assassin's Creed", "BioShock" e "Amnesia".
+          </Text>
+          <TouchableOpacity
+            onPress={() => setShowWarning(false)}
+            style={styles.closeWarningButton}
+          >
+            <Icon name="close" size={16} color="#FFF" />
+          </TouchableOpacity>
+        </View>
+      )}
 
-      {/* Lista de jogos */}
       <FlatList
         data={jogos}
         keyExtractor={(item) => item.id}
@@ -122,12 +148,17 @@ const ListaJogos = ({ navigation }: ListaJogosProps) => {
             <Text style={styles.item}>{item.nome}</Text>
             <View style={styles.iconContainer}>
               <TouchableOpacity onPress={() => toggleFavorito(item.id)}>
-                <Icon name={item.favorito ? 'star' : 'star-border'} size={24} color={item.favorito ? '#FFD700' : '#FFF'} style={{ marginHorizontal: 5 }} />
+                <Icon
+                  name={item.favorito ? 'star' : 'star-border'}
+                  size={24}
+                  color={item.favorito ? '#FFD700' : '#FFF'}
+                  style={{ marginHorizontal: 5 }}
+                />
               </TouchableOpacity>
               <TouchableOpacity onPress={() => openRenameModal(item.id, item.nome)}>
                 <Icon name="edit" size={24} color="#00E5FF" style={{ marginHorizontal: 5 }} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setShowDeleteModal(true)}>
+              <TouchableOpacity onPress={() => openDeleteModal(item.id)}>
                 <Icon name="delete" size={24} color="#FF6347" style={{ marginHorizontal: 5 }} />
               </TouchableOpacity>
             </View>
@@ -151,7 +182,7 @@ const ListaJogos = ({ navigation }: ListaJogosProps) => {
             <TouchableOpacity style={styles.addButton} onPress={addJogo}>
               <Text style={styles.addButtonText}>Adicionar</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cancelButton} onPress={() => setShowAddModal(false)}>
+            <TouchableOpacity style={styles.cancelButton} onPress={closeAddModal}>
               <Text style={styles.cancelButtonText}>Cancelar</Text>
             </TouchableOpacity>
           </View>
@@ -174,23 +205,23 @@ const ListaJogos = ({ navigation }: ListaJogosProps) => {
             <TouchableOpacity style={styles.addButton} onPress={renameJogo}>
               <Text style={styles.addButtonText}>Renomear</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cancelButton} onPress={() => setShowRenameModal(false)}>
+            <TouchableOpacity style={styles.cancelButton} onPress={closeRenameModal}>
               <Text style={styles.cancelButtonText}>Cancelar</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
 
-      {/* Modal para confirmar exclusão */}
+      {/* Modal para excluir jogo */}
       <Modal visible={showDeleteModal} animationType="fade" transparent={true}>
         <View style={styles.modalBackground}>
           <View style={styles.addModalContainer}>
             <Text style={styles.modalTitle}>Confirmar Exclusão</Text>
-            <Text style={{ color: '#FFF', marginBottom: 20 }}>Você tem certeza que deseja excluir este jogo?</Text>
+            <Text style={styles.modalText}>Você tem certeza que deseja excluir este jogo?</Text>
             <TouchableOpacity style={styles.addButton} onPress={deleteJogo}>
               <Text style={styles.addButtonText}>Excluir</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.cancelButton} onPress={() => setShowDeleteModal(false)}>
+            <TouchableOpacity style={styles.cancelButton} onPress={closeDeleteModal}>
               <Text style={styles.cancelButtonText}>Cancelar</Text>
             </TouchableOpacity>
           </View>

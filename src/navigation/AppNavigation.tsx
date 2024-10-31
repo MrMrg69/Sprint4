@@ -1,42 +1,21 @@
-import { createDrawerNavigator, DrawerScreenProps } from '@react-navigation/drawer';
-import { DrawerActions } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import React, { useState } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import ListaFranquiaFav from '../screens/ListaFranquiaFav';
 import ListaFranquias from '../screens/ListaFranquias';
 import ListaJogos from '../screens/ListaJogos';
+import ListaFranquiaFav from '../screens/ListaFranquiaFav';
 import ListaJogosFav from '../screens/ListaJogosFav';
 import LogIn from '../screens/LogIn';
 import SignIn from '../screens/SignIn';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import CustomDrawerContent from '../navigation/CustomDrawer';
-import { Franquia } from './types';
+import { RootStackParamList } from '../navigation/types';
+import { DrawerActions } from '@react-navigation/native';
 
-const Drawer = createDrawerNavigator();
-
-export type RootStackParamList = {
-  WelcomeScreen: undefined;
-  SignIn: undefined;
-  LogIn: undefined;
-  ListaFranquias: undefined;
-  ListaJogos: undefined;
-  ListaFranquiaFav: undefined;
-  ListaJogosFav: undefined;
-};
+const Drawer = createDrawerNavigator<RootStackParamList>();
 
 const AppNavigation = () => {
-  const [franquias, setFranquias] = useState<Franquia[]>([]);
-
-  const toggleFavorito = (id: string) => {
-    setFranquias((prevFranquias) =>
-      prevFranquias.map((franquia) =>
-        franquia.id === id ? { ...franquia, favorito: !franquia.favorito } : franquia
-      )
-    );
-  };
-
   return (
     <Drawer.Navigator
       initialRouteName="WelcomeScreen"
@@ -59,17 +38,15 @@ const AppNavigation = () => {
       />
       <Drawer.Screen
         name="ListaFranquias"
-        component={(props: any) => (
-          <ListaFranquias {...props} franquias={franquias} setFranquias={setFranquias} />
-        )}
+        component={ListaFranquias}
         options={({ navigation }) => ({
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
               <Icon name="menu" size={32} color="#555" style={{ marginLeft: 16 }} />
             </TouchableOpacity>
           ),
-          headerTitleAlign: 'center',
           headerTitle: 'Lista Franquias',
+          headerTitleAlign: 'center',
           headerStyle: {
             backgroundColor: '#222',
             elevation: 0,
@@ -84,24 +61,41 @@ const AppNavigation = () => {
       <Drawer.Screen
         name="ListaJogos"
         component={ListaJogos}
-      />
-      <Drawer.Screen
-        name="ListaFranquiaFav"
-        component={(props: any) => (
-          <ListaFranquiaFav
-            {...props}
-            franquias={franquias.filter((franquia) => franquia.favorito)}
-            toggleFavorito={toggleFavorito}
-          />
-        )}
         options={({ navigation }) => ({
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
               <Icon name="menu" size={32} color="#555" style={{ marginLeft: 16 }} />
             </TouchableOpacity>
           ),
+          headerRight: () => (
+            <TouchableOpacity onPress={() => console.log('Adicionar Jogo')}>
+              <Icon name="add" size={32} color="#555" style={{ marginRight: 16 }} />
+            </TouchableOpacity>
+          ),
+          headerTitle: 'Lista Jogos',
           headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#222',
+            elevation: 0,
+            shadowOpacity: 0,
+          },
+          headerTitleStyle: {
+            color: '#00E5FF',
+            fontFamily: 'PressStart2P-Regular',
+          },
+        })}
+      />
+      <Drawer.Screen
+        name="ListaFranquiaFav"
+        component={ListaFranquiaFav}
+        options={({ navigation }) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+              <Icon name="menu" size={32} color="#555" style={{ marginLeft: 16 }} />
+            </TouchableOpacity>
+          ),
           headerTitle: 'Franquia Favorita',
+          headerTitleAlign: 'center',
           headerStyle: {
             backgroundColor: '#222',
             elevation: 0,
@@ -116,6 +110,24 @@ const AppNavigation = () => {
       <Drawer.Screen
         name="ListaJogosFav"
         component={ListaJogosFav}
+        options={({ navigation }) => ({
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
+              <Icon name="menu" size={32} color="#555" style={{ marginLeft: 16 }} />
+            </TouchableOpacity>
+          ),
+          headerTitle: 'Jogos Favoritos',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#222',
+            elevation: 0,
+            shadowOpacity: 0,
+          },
+          headerTitleStyle: {
+            color: '#00E5FF',
+            fontFamily: 'PressStart2P-Regular',
+          },
+        })}
       />
     </Drawer.Navigator>
   );

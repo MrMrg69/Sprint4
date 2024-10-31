@@ -1,11 +1,5 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 
-type Jogo = {
-  id: string;
-  nome: string;
-  favorito: boolean;
-};
-
 type JogosContextType = {
   jogos: Jogo[];
   setJogos: React.Dispatch<React.SetStateAction<Jogo[]>>;
@@ -38,4 +32,10 @@ export const useJogos = () => {
     throw new Error('useJogos deve ser usado dentro de um JogosProvider');
   }
   return context;
+};
+
+export type Jogo = {
+  id: string;
+  nome: string;
+  favorito: boolean;
 };
