@@ -1,44 +1,36 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import styles from '../Styles/ListaFranquiasStyles';
+import { Franquia } from './ListaFranquias';
 
-import { StackNavigationProp } from '@react-navigation/stack';
-import type { RootStackParamList } from '../navigation/AppNavigation';
-
-type ListaFranquiaFavNavigationProp = StackNavigationProp<RootStackParamList, 'ListaFranquiaFav'>;
-
-const franquiasFavoritas = [
-    { id: '1', nome: 'Franquia Favorita 1' },
-    { id: '2', nome: 'Franquia Favorita 2' },
-];
-
-const ListaFranquiaFav = ({ navigation }: { navigation: ListaFranquiaFavNavigationProp }) => {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Franquias Favoritas</Text>
-            <FlatList
-                data={franquiasFavoritas}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => <Text style={styles.item}>{item.nome}</Text>}
-            />
-        </View>
-    );
+type ListaFranquiaFavProps = {
+  franquias: Franquia[];
+  toggleFavorito: (id: string) => void;
 };
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 20,
-    },
-    item: {
-        fontSize: 18,
-        padding: 10,
-        borderBottomWidth: 1,
-    },
-});
+const ListaFranquiaFav = ({ franquias, toggleFavorito }: ListaFranquiaFavProps) => {
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={franquias}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.itemContainer}>
+            <Text style={styles.item}>{item.nome}</Text>
+            <TouchableOpacity onPress={() => toggleFavorito(item.id)}>
+              <Icon
+                name={item.favorito ? 'star' : 'star-border'}
+                size={24}
+                color={item.favorito ? '#FFD700' : '#FFF'}
+                style={{ marginHorizontal: 5 }}
+              />
+            </TouchableOpacity>
+          </View>
+        )}
+      />
+    </View>
+  );
+};
 
 export default ListaFranquiaFav;

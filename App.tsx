@@ -1,12 +1,15 @@
-import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import AppNavigation from './src/navigation/AppNavigation';
+import { FranquiasProvider } from './src/navigation/FranquiasContext';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <AppNavigation />
-    </NavigationContainer>
+    <FranquiasProvider>
+      <NavigationContainer>
+        <AppNavigation />
+      </NavigationContainer>
+    </FranquiasProvider>
   );
 };
 

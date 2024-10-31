@@ -6,41 +6,45 @@ import { DrawerContentComponentProps, DrawerContentScrollView, DrawerItem } from
 
 // Custom Drawer Content Component
 const CustomDrawerContent = (props: DrawerContentComponentProps) => {
+  const { state, navigation } = props;
+
+  // Filtrar rotas que não devem ser exibidas no menu lateral
+  const filteredRoutes = state.routes.filter(
+    (route) => route.name !== 'WelcomeScreen' && route.name !== 'SignIn' && route.name !== 'LogIn'
+  );
+
   return (
     <DrawerContentScrollView {...props} contentContainerStyle={styles.drawerContent}>
       <View style={{ flex: 1 }}>
-        <DrawerItem
-          label="Lista Franquias"
-          onPress={() => props.navigation.navigate('ListaFranquias')}
-          icon={({ size }) => (
-            <Icon name="list" size={size} style={styles.drawerIcon} />
-          )}
-          labelStyle={styles.drawerItemLabel}
-        />
-        <DrawerItem
-          label="Lista Jogos"
-          onPress={() => props.navigation.navigate('ListaJogos')}
-          icon={({ size }) => (
-            <Icon name="games" size={size} style={styles.drawerIcon} />
-          )}
-          labelStyle={styles.drawerItemLabel}
-        />
-        <DrawerItem
-          label="Jogos Favoritos"
-          onPress={() => props.navigation.navigate('ListaJogosFav')}
-          icon={({ size }) => (
-            <Icon name="favorite" size={size} style={styles.drawerIcon} />
-          )}
-          labelStyle={styles.drawerItemLabel}
-        />
-        <DrawerItem
-          label="Franquias Favoritas"
-          onPress={() => props.navigation.navigate('ListaFranquiaFav')}
-          icon={({ size }) => (
-            <Icon name="star" size={size} style={styles.drawerIcon} />
-          )}
-          labelStyle={styles.drawerItemLabel}
-        />
+        {filteredRoutes.map((route) => {
+          const isFocused = state.routeNames[state.index] === route.name;
+
+          return (
+            <DrawerItem
+              key={route.key}
+              label={
+                route.name === 'ListaFranquias' ? 'Lista Franquias' :
+                route.name === 'ListaJogos' ? 'Lista Jogos' :
+                route.name === 'ListaJogosFav' ? 'Jogos Favoritos' :
+                'Franquia Favorita'
+              }
+              onPress={() => navigation.navigate(route.name)}
+              icon={({ size }) => (
+                <Icon
+                  name={
+                    route.name === 'ListaFranquias' ? 'list' :
+                    route.name === 'ListaJogos' ? 'games' :
+                    route.name === 'ListaJogosFav' ? 'favorite' :
+                    'star'
+                  }
+                  size={size}
+                  style={isFocused ? styles.drawerItemActiveIcon : styles.drawerIcon}
+                />
+              )}
+              labelStyle={isFocused ? styles.drawerItemActiveLabel : styles.drawerItemLabel}
+            />
+          );
+        })}
       </View>
       <View style={styles.logOutContainer}>
         <TouchableOpacity onPress={() => props.navigation.navigate('WelcomeScreen')} style={styles.logOutButton}>

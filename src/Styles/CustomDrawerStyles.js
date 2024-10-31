@@ -9,7 +9,14 @@ const styles = StyleSheet.create({
     color: '#FFF',
   },
   drawerIcon: {
-    color: '#FFF', // Altera a cor dos ícones para branco
+    color: '#FFF',
+  },
+  drawerItemActiveLabel: {
+    color: '#00E5FF',
+    fontWeight: 'bold',
+  },
+  drawerItemActiveIcon: {
+    color: '#00E5FF',
   },
   logOutContainer: {
     flexDirection: 'row',

@@ -1,6 +1,11 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#222', // Mesma cor de fundo das outras telas
+  },
   modalContainer: {
     backgroundColor: '#3333FF',
     padding: 20,
@@ -14,6 +19,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontSize: 16,
     marginBottom: 10,
+    fontFamily: 'PressStart2P-Regular', // Fonte estilo gamer
   },
   closeButton: {
     position: 'absolute',
@@ -27,16 +33,12 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 5,
   },
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#222',
-  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#FFF',
+    color: '#00E5FF',
     marginBottom: 20,
+    fontFamily: 'PressStart2P-Regular', // Fonte estilo gamer
   },
   item: {
     fontSize: 18,
@@ -45,6 +47,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     marginRight: 10,
     maxWidth: '70%',
+    fontFamily: 'PressStart2P-Regular', // Fonte estilo gamer
   },
   itemContainer: {
     flexDirection: 'row',
@@ -79,6 +82,7 @@ const styles = StyleSheet.create({
     color: '#00E5FF',
     marginBottom: 20,
     textAlign: 'center',
+    fontFamily: 'PressStart2P-Regular', // Fonte estilo gamer
   },
   inputGamer: {
     borderWidth: 2,
@@ -88,6 +92,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     color: '#FFF',
     backgroundColor: '#333',
+    fontFamily: 'PressStart2P-Regular', // Fonte estilo gamer
   },
   addButtonGamer: {
     backgroundColor: '#00E5FF',
@@ -100,21 +105,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.6,
     shadowRadius: 10,
   },
-  addButtonGamerPressed: {
-    backgroundColor: '#39FF14',
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 10,
-    alignItems: 'center',
-    shadowColor: '#39FF14',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.6,
-    shadowRadius: 10,
-  },
   addButtonTextGamer: {
     color: '#FFF',
     fontWeight: 'bold',
     fontSize: 16,
+    fontFamily: 'PressStart2P-Regular', // Fonte estilo gamer
   },
   cancelButtonGamer: {
     backgroundColor: '#FF0000',
@@ -126,6 +121,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontWeight: 'bold',
     fontSize: 16,
+    fontFamily: 'PressStart2P-Regular', // Fonte estilo gamer
   },
   drawerContent: {
     flex: 1,
@@ -135,6 +131,7 @@ const styles = StyleSheet.create({
     color: '#00E5FF',
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: 'PressStart2P-Regular', // Fonte estilo gamer
   },
   drawerItemIcon: {
     color: '#00E5FF',
